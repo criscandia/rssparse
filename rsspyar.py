@@ -16,12 +16,12 @@ from datetime import datetime
 
 #Creo la ruta del .txt con la data, recorro el rss y escribo el archivo
 
-myfile="/home/crisian/Dropbox/rssparse/rssparse/rsspyar.txt"
-d = feedparser.parse('http://python.org.ar/trabajo/rss')
+myfile="/home/crisian/Dropbox/rssparse/rssparse/rss.txt"
+d = feedparser.parse('https://remoteok.io/remote-jobs.rss')
 
 for posts in d.entries:
     print posts.title + ": " + posts.link + "\n"
-    f = open("rsspyar.txt", "a")
+    f = open("rss.txt", "a")
     f.write(str(posts.title) + ": " + str(posts.link) +'\n')
     f.truncate()
 
@@ -32,11 +32,11 @@ toaddrs = 'cristian.candia@devecoop.com'
 msg = MIMEMultipart()
 now = datetime.now()
 date = now.strftime('%d %b %Y %X')
-msg["Subject"] = "Listado de Proyectos Pyar"+ ', ' + date
+msg["Subject"] = "Listado de Proyectos Remote OK"+ ', ' + date
 f = open("rss.txt")
 attachment = MIMEText(f.read())
 attachment.add_header('Content-Disposition', 'attachment',
-                      filename="/home/crisian/Dropbox/rssparse/rssparse/rsspyar.txt")
+                      filename="/home/crisian/Dropbox/rssparse/rssparse/rss.txt")
 msg.attach(attachment)
 
 #Hago el envío de mail
