@@ -1,0 +1,7 @@
+[main]
+username = user@example.com
+password = supersecurepasword
+fromaddr = fromadd@example.com
+toaddrs = toaddr@example.com
+
+
