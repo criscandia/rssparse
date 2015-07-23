@@ -1,0 +1,6 @@
+http://python.org.ar/trabajo/rss
+https://remoteok.io/remote-jobs.rss
+https://weworkremotely.com/categories/1/jobs.rss
+https://dribbble.com/jobs.rss?location=Anywhere
+http://feeds.feedblitz.com/flexjobs
+https://jobspresso.co/?feed=job_feed&job_types=developer&search_location&job_categories&search_keywords
