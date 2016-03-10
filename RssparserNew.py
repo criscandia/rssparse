@@ -20,7 +20,7 @@ def sendmail(content):
     msg = MIMEMultipart()
     now = datetime.now()
     date = now.strftime('%d %b %Y %X')
-    msg["Subject"] = "Listado de Proyectos"+ ', ' + date
+    msg["Subject"] = "Listado de Proyectos Filtrados"+ ', ' + date
     attachment = MIMEText(content.encode('utf-8'))
     attachment.add_header('Content-Disposition', 'attachment',
                         filename="rss_laburos.txt")
@@ -47,13 +47,15 @@ def sendmail(content):
 def parse(url_feed):
     posts = feedparser.parse(url_feed)
     content = ""
+    tags = ['angular','node','nodejs','python', 'django','frontend','backend','remote']
     try:
         for post in posts.entries:
-            link  = u"{}: {}\n".format(post.title, post.link)
-            content += link
+            if any(tag in post.title.lower() for tag in tags):       
+                    link  = u"{}: {}\n".format(post.title, post.link)
+                    content += link
+            else: content
     except Exception, err:
-        print "Failed to process link {}".format("Link")
-
+        print "Failed to process link {}".format("Link")        
     return content
 
 
@@ -68,6 +70,7 @@ if __name__=="__main__":
     if options.url_feed:
     #url_feed = 'http://python.org.ar/trabajo/rss'
         content = parse(options.url_feed)
-        sendmail(content)
+        if content != "":
+            sendmail(content)
     else:
         print "Usage rssparser.py -f URL"
