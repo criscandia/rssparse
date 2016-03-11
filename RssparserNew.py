@@ -47,7 +47,8 @@ def sendmail(content):
 def parse(url_feed):
     posts = feedparser.parse(url_feed)
     content = ""
-    tags = ['angular','node','nodejs','python', 'django','frontend','backend','remote']
+    tags = ['angular','node','nodejs','python','django','frontend','backend',
+    'remote','remoto','fullstack']
     try:
         for post in posts.entries:
             if any(tag in post.title.lower() for tag in tags):       
