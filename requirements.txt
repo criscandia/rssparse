@@ -1,6 +1,6 @@
 CDApplet==1.0
 CDBashApplet==1.0
-Django==1.7.1
+Django==1.11.28
 PAM==0.4.2
 Pillow==2.3.0
 PyBluez==0.18
