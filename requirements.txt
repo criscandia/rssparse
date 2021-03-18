@@ -2,7 +2,7 @@ CDApplet==1.0
 CDBashApplet==1.0
 Django==1.7.1
 PAM==0.4.2
-Pillow==2.3.0
+Pillow==8.1.1
 PyBluez==0.18
 SQLAlchemy==0.8.4
 Twisted-Core==13.2.0
