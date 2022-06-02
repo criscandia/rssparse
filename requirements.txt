@@ -21,7 +21,7 @@ dirspec==13.10
 dnspython==1.11.1
 duplicity==0.6.23
 enum34==1.0.4
-html5lib==0.999
+html5lib==0.99999999
 httplib2==0.8
 ipaddress==1.0.7
 isort==3.9.6
