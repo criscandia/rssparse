@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 
 
-import ConfigParser
+import configparser
 import io
 import os
 import re
@@ -10,8 +10,9 @@ import sys
 from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.MIMEMultipart import MIMEMultipart
+from email.mime.multipart import MIMEMultipart
 from optparse import OptionParser
+from email.mime.text import MIMEText
 
 import feedparser
 
@@ -20,14 +21,17 @@ def sendmail(content):
     msg = MIMEMultipart()
     now = datetime.now()
     date = now.strftime('%d %b %Y %X')
+    part1 = MIMEText(content, "plain")
+
     msg["Subject"] = "Listado de Proyectos Filtrados"+ ', ' + date
-    attachment = MIMEText(content.encode('utf-8'))
+    attachment = MIMEText(content.encode("utf8"), _subtype="plain", _charset="utf-8")
     attachment.add_header('Content-Disposition', 'attachment',
                         filename="rss_laburos.txt")
     msg.attach(attachment)
-    unexpanded_path = os.path.join("~", ".config", "rssparser.cfg")
+    msg.attach(part1)
+    unexpanded_path = os.path.join("rssparser.cfg")
     expanded_path = os.path.expanduser(unexpanded_path)
-    config = ConfigParser.RawConfigParser()
+    config = configparser.RawConfigParser()
     config.read(expanded_path)
 
     username = config.get('main', 'username')
@@ -52,11 +56,11 @@ def parse(url_feed):
     try:
         for post in posts.entries:
             if any(tag in post.title.lower() for tag in tags):       
-                    link  = u"{}: {}\n".format(post.title, post.link)
+                    link  = "{}: {}\n".format(post.title, post.link)
                     content += link
             else: content
-    except Exception, err:
-        print "Failed to process link {}".format("Link")        
+    except Exception as err:
+        print("Failed to process link {}".format("Link"))        
     return content
 
 
@@ -74,4 +78,4 @@ if __name__=="__main__":
         if content != "":
             sendmail(content)
     else:
-        print "Usage rssparser.py -f URL"
+        print("Usage rssparser.py -f URL")
