@@ -52,7 +52,7 @@ def parse(url_feed):
     posts = feedparser.parse(url_feed)
     content = ""
     tags = ['angular','node','nodejs','python','django','frontend','fron end',
-    'backend','back end','remote','remoto','fullstack','js']
+    'backend','back end','remote','remoto','fullstack','js','.net','SAP','sap','azure','abap','react','reactnative','graphql','typescript','javascript','golang']
     try:
         for post in posts.entries:
             if any(tag in post.title.lower() for tag in tags):       
