@@ -22,7 +22,6 @@ def sendmail(content):
     now = datetime.now()
     date = now.strftime('%d %b %Y %X')
     part1 = MIMEText(content, "plain")
-
     msg["Subject"] = "Listado de Proyectos Filtrados"+ ', ' + date
     attachment = MIMEText(content.encode("utf8"), _subtype="plain", _charset="utf-8")
     attachment.add_header('Content-Disposition', 'attachment',
@@ -38,6 +37,7 @@ def sendmail(content):
     password = config.get('main', 'password')
     fromaddr = config.get('main', 'fromaddr')
     toaddrs = config.get('main', 'toaddrs')
+    ccaddr = config.get('main', 'ccaddr')
 
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
