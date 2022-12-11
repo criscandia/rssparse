@@ -7,13 +7,14 @@ import os
 import re
 import smtplib
 import sys
+import urllib
 from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from optparse import OptionParser
 from email.mime.text import MIMEText
-
+import csv
 import feedparser
 
 
@@ -28,6 +29,8 @@ def sendmail(content):
                         filename="rss_laburos.txt")
     msg.attach(attachment)
     msg.attach(part1)
+    #for l in part1:
+    #    print(content)
     unexpanded_path = os.path.join("rssparser.cfg")
     expanded_path = os.path.expanduser(unexpanded_path)
     config = configparser.RawConfigParser()
@@ -66,6 +69,16 @@ def parse(url_feed):
 
 
 if __name__=="__main__":
+    filename = "ListadoDeProyectos.csv"
+    with open("sitios.txt", "r") as file:
+        urls = file.readlines()
+    for url in urls:
+        with open(filename, 'w') as f:
+            f.write(str(urls))
+            f.close()
+            print(urls)
+            
+        
     feed_option = "url_feed"
     parser = OptionParser()
     parser.add_option("-f", "--feed", dest=feed_option,
@@ -73,7 +86,7 @@ if __name__=="__main__":
 
     (options, args) = parser.parse_args()
     if options.url_feed:
-    #url_feed = 'http://python.org.ar/trabajo/rss'
+        url_feed = urls
         content = parse(options.url_feed)
         if content != "":
             sendmail(content)
