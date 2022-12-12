@@ -47,7 +47,7 @@ def sendmail(content):
     server.starttls()
     server.ehlo()
     server.login(username,password)
-    server.sendmail(fromaddr, toaddrs, msg.as_string())
+    server.sendmail(fromaddr, (toaddrs, ccaddr), msg.as_string())
     server.quit()
 
 
