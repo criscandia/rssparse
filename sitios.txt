@@ -22,8 +22,3 @@ https://www.krop.com/services/feeds/rss/latest/
 https://larajobs.com/feed
 https://app.vuejobs.com/feed/posts
 https://landing.jobs/feed?remote=true
-https://www.upwork.com/ab/feed/jobs/rss?python
-https://www.upwork.com/ab/feed/jobs/rss?javascript
-https://www.upwork.com/ab/feed/jobs/rss?backend
-https://www.upwork.com/ab/feed/jobs/rss?fullstack
-https://www.upwork.com/ab/feed/jobs/rss?frontend
