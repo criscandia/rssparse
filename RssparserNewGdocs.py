@@ -82,15 +82,14 @@ def sheet():
     df["Jobs"] = jobs
     df["Links"] = links
     sheet_name = str(datetime.now().year) + str(datetime.now().month)
-    #sheet_name = "Diciembre"
     try:
-        wks = gc.open("ListadoDeProyectos").worksheet(sheet_name)
+        wks = gc.open("ListadoDeProyectos").worksheet_by_title(sheet_name)
     except Exception as err:
         file = gc.open("ListadoDeProyectos")
         file.add_worksheet(sheet_name)
-        wks = file.worksheet(sheet_name)
+        wks = file.worksheet_by_title(sheet_name)
     values = df.values.tolist()
-    wks.append_table(values, start='A1', end=None, dimension='ROWS', overwrite=False)
+    wks.append_table(values, start='A1', end=None, dimension='ROWS', overwrite=None)
     
 
 if __name__=="__main__":
