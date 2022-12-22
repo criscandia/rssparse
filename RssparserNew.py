@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*
+    # -*- coding: utf-8 -*
 
 
 import configparser
@@ -16,8 +16,14 @@ from optparse import OptionParser
 from email.mime.text import MIMEText
 import csv
 import feedparser
+import pygsheets
+import pandas as pd
 
-
+jobs = []
+links = []
+dates = []
+gc = pygsheets.authorize(service_file="./gs_credentials.json")
+    
 def sendmail(content):
     msg = MIMEMultipart()
     now = datetime.now()
@@ -60,15 +66,30 @@ def parse(url_feed):
         for post in posts.entries:
             if any(tag in post.title.lower() for tag in tags):       
                     link  = "{}: {}\n".format(post.title, post.link)
+                    jobs.append(post.title)
+                    links.append(post.link)
+                    dates.append(datetime.now().strftime('%d %b %Y %X'))
                     content += link
             else: content
     except Exception as err:
         print("Failed to process link {}".format("Link"))        
     return content
 
-
-
-
+def sheet():
+    df = pd.DataFrame()
+    df["Date"] = dates
+    df["Jobs"] = jobs
+    df["Links"] = links
+    sheet_name = str(datetime.now().year) + str(datetime.now().month)
+    try:
+        wks = gc.open("ListadoDeProyectos").worksheet_by_title(sheet_name)
+    except Exception as err:
+        file = gc.open("ListadoDeProyectos")
+        file.add_worksheet(sheet_name)
+        wks = file.worksheet_by_title(sheet_name)
+    values = df.values.tolist()
+    wks.append_table(values, start='A1', end=None, dimension='ROWS', overwrite=None)
+    
 if __name__=="__main__":
     feed_option = "url_feed"
     parser = OptionParser()
@@ -79,7 +100,12 @@ if __name__=="__main__":
     if options.url_feed:
     #url_feed = 'http://python.org.ar/trabajo/rss'
         content = parse(options.url_feed)
+        print(jobs)
         sendmail(content)
+        sheet()
     else:
         print ("Usage rssparser.py -f URL")
+
+
+
 
