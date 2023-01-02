@@ -22,3 +22,4 @@ https://www.krop.com/services/feeds/rss/latest/
 https://larajobs.com/feed
 https://app.vuejobs.com/feed/posts
 https://landing.jobs/feed?remote=true
+https://jsjobbs.com/rss

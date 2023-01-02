@@ -15,5 +15,5 @@ python3 RssparserNewGdocs.py -f https://weworkremotely.com/categories/remote-bac
 python3 RssparserNewGdocs.py -f https://weworkremotely.com/categories/remote-front-end-programming-jobs.rss
 python3 RssparserNewGdocs.py -f https://weworkremotely.com/categories/remote-devops-sysadmin-jobs.rss
 python3 RssparserNewGdocs.py -f https://weworkremotely.com/categories/remote-full-stack-programming-jobs.rss
-
+python3 RssparserNewGdocs.py -f https://jsjobbs.com/rss
 
