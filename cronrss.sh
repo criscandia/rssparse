@@ -25,7 +25,6 @@ python3 RssparserNew.py -f https://jobs.adafruit.com/wpjobboard/xml/rss/?query=&
 python3 RssparserNew.py -f https://www.golangprojects.com/rss.xml
 python3 RssparserNew.py -f https://hasjob.co/feed
 python3 RssparserNew.py -f https://www.krop.com/services/feeds/rss/latest/
-python3 RssparserNew.py -f https://www.djangoproject.com/rss/community/jobs/
 
 
 

@@ -10,8 +10,7 @@ https://rss.indeed.com/rss?q=development
 https://rss.indeed.com/rss?q=javascript
 https://rss.indeed.com/rss?q=react 
 https://rss.indeed.com/rss?q=python
-https://rss.indeed.com/rss?q=engineer
-https://rss.indeed.com/rss?q=developer
+https://rss.indeed.com/rss?q=engineerq=developer
 https://rss.indeed.com/rss?q=devops
 https://rss.indeed.com/rss?q=devs 
 https://www.remotepython.com/latest/jobs/feed/

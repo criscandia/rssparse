@@ -18,6 +18,7 @@ import csv
 import feedparser
 import pygsheets
 import pandas as pd
+import time
 
 jobs = []
 links = []
@@ -35,8 +36,7 @@ def sendmail(content):
                         filename="rss_laburos.txt")
     msg.attach(attachment)
     msg.attach(part1)
-    #for l in part1:
-    #    print(content)
+
     unexpanded_path = os.path.join("rssparser.cfg")
     expanded_path = os.path.expanduser(unexpanded_path)
     config = configparser.RawConfigParser()
@@ -62,10 +62,14 @@ def parse(url_feed):
     content = ""
     tags = ['angular','node','nodejs','python','django','frontend','backend','back end','remote','remoto','fullstack','js','.net','sap','azure','abap','react','reactnative','graphql','typescript','javascript','golang','vue', 'data']
     locations = ['United States', 'Canada']
+    t = time.strptime('07/28/2014 18:54:55.099000', '%m/%d/%Y %H:%M:%S.%f')
+    sevendays = 86400*7
+    current = time.strftime ("%s",time.localtime())
+
     #print(posts)
     try:
         for post in list(filter(lambda post: any(location.lower() in post.summary.lower() for location in locations), posts.entries)):
-            if any(tag in post.title.lower() for tag in tags):       
+            if any(tag in post.title.lower() and int(current) - time.mktime(t) > sevendays for tag in tags):
                     link  = "{}: {}\n".format(post.title, post.link)
                     jobs.append(post.title)
                     links.append(post.link)

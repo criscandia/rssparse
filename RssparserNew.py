@@ -18,6 +18,7 @@ import csv
 import feedparser
 import pygsheets
 import pandas as pd
+import time
 
 jobs = []
 links = []
@@ -60,11 +61,15 @@ def sendmail(content):
 def parse(url_feed):
     posts = feedparser.parse(url_feed)
     content = ""
-    tags = ['angular','node','nodejs','python','django','frontend','fron end',
-    'backend','back end','remote','remoto','fullstack','js','.net','sap','azure','abap','react','reactnative','graphql','typescript','javascript','golang','vue']
+    tags = ['angular','node','nodejs','python','django','frontend','backend','back end','remote','remoto','fullstack','js','.net','sap','azure','abap','react','reactnative','graphql','typescript','javascript','golang','vue', 'data']
+    t = time.strptime('07/28/2014 18:54:55.099000', '%m/%d/%Y %H:%M:%S.%f')
+    sevendays = 86400*7
+    current = time.strftime ("%s",time.localtime())
+
+    #print(posts)
     try:
-        for post in posts.entries:
-            if any(tag in post.title.lower() for tag in tags):       
+        for post in list(filter(lambda post: any(location.lower() in post.summary.lower() for location in locations), posts.entries)):
+            if any(tag in post.title.lower() and int(current) - time.mktime(t) > sevendays for tag in tags):
                     link  = "{}: {}\n".format(post.title, post.link)
                     jobs.append(post.title)
                     links.append(post.link)
